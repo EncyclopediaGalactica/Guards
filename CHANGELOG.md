@@ -1,3 +1,10 @@
+## [0.1.7](https://github.com/EncyclopediaGalactica/Guards/compare/0.1.6...0.1.7) (2021-08-08)
+
+
+### Bug Fixes
+
+* nuspec is back ([#8](https://github.com/EncyclopediaGalactica/Guards/issues/8)) ([c7575ea](https://github.com/EncyclopediaGalactica/Guards/commit/c7575ea8e2bb3574f617a2c0c4d6879dc316b4e6))
+
 ## [0.1.6](https://github.com/EncyclopediaGalactica/Guards/compare/0.1.5...0.1.6) (2021-08-08)
 
 
