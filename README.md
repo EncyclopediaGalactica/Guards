@@ -1,3 +1,3 @@
 # Encyclopedia Galactica - Guard
 
-Latest release version: 0.1.4
+Latest release version: 0.1.5
