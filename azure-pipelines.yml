@@ -112,9 +112,7 @@ stages:
           clean: all
         steps:
           - script: |
-              dotnet pack src/Guards/Guards.csproj \n
-              --configuration Release \n
-              --include-symbols \n 
-              -p:NuspecFile=src/Guards/Guards.nuspec
+              dotnet pack Guards.csproj --configuration Release --include-symbols -p:NuspecFile=Guards.nuspec
             displayName: Nuget
+            workingDirectory: src/Guards
   
