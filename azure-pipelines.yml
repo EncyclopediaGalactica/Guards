@@ -108,7 +108,7 @@ stages:
       - job: nuget
         dependsOn: semantic_release
         displayName: Nuget
-        worksapce:
+        workspace:
           clean: all
         steps:
           - script: |
