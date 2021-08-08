@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<package>
+    <metadata>
+        <id>EncyclopediaGalactica.Guards</id>
+        <version>0.1.1</version>
+        <authors>Andras Csanyi</authors>
+        <description>Simple validators.</description>
+        <projectUrl>https://github.com/EncyclopediaGalactica</projectUrl>
+        <title>Guards for Encyclopedia Galactica system.</title>
+    </metadata>
+</package>
