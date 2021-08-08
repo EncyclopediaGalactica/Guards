@@ -105,11 +105,13 @@ stages:
             env:
               GH_TOKEN: $(githubToken)
 
-      - job: release_build
+      - job: nuget
         dependsOn: semantic_release
-        displayName: Release build
+        displayName: Nuget
+        worksapce:
+          clean: all
         steps:
           - script: |
-              dotnet build $solutionName $releaseBuild
-            displayName: Release build
+              dotnet pack src/Guards/Guards.csproj --configuration Release --include-symbols
+            displayName: Nuget
   
