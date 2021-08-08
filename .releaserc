@@ -10,7 +10,6 @@
       "@semantic-release/exec", 
       {
         "prepareCmd": "bump2version --allow-dirty --current-version ${lastRelease.version} --new-version ${nextRelease.version} patch",
-        "successCmd": "export NUGET=${nextRelease.version}"
       }
     ],
     [
