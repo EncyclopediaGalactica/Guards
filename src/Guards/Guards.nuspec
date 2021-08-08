@@ -2,7 +2,7 @@
 <package>
     <metadata>
         <id>EncyclopediaGalactica.Guards</id>
-        <version>0.1.2</version>
+        <version>0.1.3</version>
         <authors>Andras Csanyi</authors>
         <description>Simple validators.</description>
         <projectUrl>https://github.com/EncyclopediaGalactica</projectUrl>
