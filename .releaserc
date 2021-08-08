@@ -10,6 +10,10 @@
       "@semantic-release/exec", 
       {
         "prepareCmd": "bump2version --allow-dirty --current-version ${lastRelease.version} --new-version ${nextRelease.version} patch"
+      },
+      "@semantic-release/exec", 
+      {
+        "prepareCmd": "echo $(version) > version.txt"
       }
     ],
     [

@@ -112,6 +112,9 @@ stages:
           clean: all
         steps:
           - script: |
-              dotnet pack src/Guards/Guards.csproj --configuration Release --include-symbols
+              cat version.txt
+            displayName: Version
+          - script: |
+              dotnet pack src/Guards/Guards.csproj --configuration Release --include-symbols -p:PackageVersion=`cat version.txt`
             displayName: Nuget
   
