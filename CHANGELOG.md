@@ -1,3 +1,10 @@
+## [0.1.8](https://github.com/EncyclopediaGalactica/Guards/compare/0.1.7...0.1.8) (2021-08-08)
+
+
+### Bug Fixes
+
+* working dir ([#9](https://github.com/EncyclopediaGalactica/Guards/issues/9)) ([514da36](https://github.com/EncyclopediaGalactica/Guards/commit/514da36ffd83ecb36c43c8c525ec1893e2723654))
+
 ## [0.1.7](https://github.com/EncyclopediaGalactica/Guards/compare/0.1.6...0.1.7) (2021-08-08)
 
 
