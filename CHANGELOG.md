@@ -1,3 +1,10 @@
+## [0.1.5](https://github.com/EncyclopediaGalactica/Guards/compare/0.1.4...0.1.5) (2021-08-08)
+
+
+### Bug Fixes
+
+* version env variable ([#6](https://github.com/EncyclopediaGalactica/Guards/issues/6)) ([87f1bf1](https://github.com/EncyclopediaGalactica/Guards/commit/87f1bf1b79ad0bc7bae21da5cb002555ab04084a))
+
 ## [0.1.4](https://github.com/EncyclopediaGalactica/Guards/compare/0.1.3...0.1.4) (2021-08-08)
 
 
