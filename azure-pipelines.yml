@@ -14,7 +14,7 @@ variables:
   solutionName: 'SourceFormatService.sln'
 
 stages:
-  - stage: Env. Variables
+  - stage: Env_Variables
     jobs:
       - job:
         steps:
