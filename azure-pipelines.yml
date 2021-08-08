@@ -115,4 +115,12 @@ stages:
               dotnet pack Guards.csproj --configuration Release --include-symbols -p:NuspecFile=Guards.nuspec
             displayName: Nuget
             workingDirectory: src/Guards
+            
+          - script:
+              dotnet nuget push src/Guards/Guards/bin/Release/EncyclopediaGalactica.Guards.`cat version.txt`.nupkg --api-key $(GH_TOKEN) --source "github"
+              dotnet nuget push src/Guards/Guards/bin/Release/EncyclopediaGalactica.Guards.`cat version.txt`.symbols.nupkg --api-key $(GH_TOKEN) --source "github"
+            displayName: Publish Nuget
+            env:
+              GH_TOKEN: $(githubToken)
+              
   

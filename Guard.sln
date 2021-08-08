@@ -13,6 +13,7 @@ ProjectSection(SolutionItems) = preProject
 	.releaserc = .releaserc
 	azure-pipelines.yml = azure-pipelines.yml
 	xunit.runner.json = xunit.runner.json
+	version.txt = version.txt
 EndProjectSection
 EndProject
 Global
