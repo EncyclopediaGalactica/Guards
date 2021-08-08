@@ -1,3 +1,11 @@
+## [0.1.3](https://github.com/EncyclopediaGalactica/Guards/compare/0.1.2...0.1.3) (2021-08-08)
+
+
+### Bug Fixes
+
+* version ([#3](https://github.com/EncyclopediaGalactica/Guards/issues/3)) ([197feac](https://github.com/EncyclopediaGalactica/Guards/commit/197feacba6843de0802ca55dc84b6e02fc611a22))
+* version next ([#4](https://github.com/EncyclopediaGalactica/Guards/issues/4)) ([472ce5a](https://github.com/EncyclopediaGalactica/Guards/commit/472ce5ac14db7440158dc795c9f5f36ecf6a6f8c))
+
 ## [0.1.2](https://github.com/EncyclopediaGalactica/Guards/compare/0.1.1...0.1.2) (2021-08-08)
 
 
