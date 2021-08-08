@@ -20,5 +20,6 @@ namespace EncyclopediaGalactica.Guards.Tests
             // Assert
             action.Should().ThrowExactly<GuardException>();
         }
+        
     }
 }
