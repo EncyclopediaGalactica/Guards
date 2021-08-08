@@ -112,11 +112,10 @@ stages:
           clean: all
         steps:
           - script: |
-              cat version.txt
-            displayName: Version
-          - script: |
               echo $NUGET_VERSION
               echo $(NUGET_VERSION)
               dotnet pack src/Guards/Guards.csproj --configuration Release --include-symbols -p:PackageVersion=$NUGET_VERSION
             displayName: Nuget
+            env:
+              NUGET_VERSION: variables['Nuget']
   
