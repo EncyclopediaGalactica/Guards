@@ -112,10 +112,9 @@ stages:
           clean: all
         steps:
           - script: |
-              echo $NUGET_VERSION
-              echo $(NUGET_VERSION)
-              dotnet pack src/Guards/Guards.csproj --configuration Release --include-symbols -p:PackageVersion=$NUGET_VERSION
+              dotnet pack src/Guards/Guards.csproj \n
+              --configuration Release \n
+              --include-symbols \n 
+              -p:NuspecFile=src/Guards/Guards.nuspec
             displayName: Nuget
-            env:
-              NUGET_VERSION: variables['Nuget']
   
