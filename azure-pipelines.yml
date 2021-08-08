@@ -1,0 +1,115 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pr:
+  - main
+
+pool: 'contabo'
+
+variables:
+  releaseBuild: '-c Release'
+  debugBuild: '-c Release'
+  solutionName: 'SourceFormatService.sln'
+
+stages:
+  - stage: Env. Variables
+    jobs:
+      - job:
+        steps:
+          - script: |
+              echo $PATH
+              env | sort
+
+  - stage: Feature_branch
+    condition: ne(variables['System.PullRequest.SourceBranch'], '')
+    jobs:
+      - job: restore_solution
+        displayName: Restore solution
+        steps:
+          - script: dotnet restore $solutionName
+
+      - job: build_solution
+        displayName: Build solution
+        dependsOn: restore_solution
+        steps:
+          - script: dotnet build $solutionName $debugBuild
+
+      - job: test_solution
+        displayName: Test solution
+        dependsOn: build_solution
+        steps:
+          - script: dotnet test $solutionName
+
+  - stage: Main_branch
+    condition: and(eq(variables['System.PullRequest.SourceBranch'], ''), eq(variables['Build.SourceBranch'],'refs/heads/main'))
+    jobs:
+
+      - job: restore_solution
+        displayName: Restore solution
+        steps:
+          - script: dotnet restore $solutionName
+
+      - job: build_solution
+        dependsOn: restore_solution
+        displayName: Build solution
+        steps:
+          - script: dotnet build $solutionName $debugBuild
+
+      - job: test_solution
+        dependsOn: build_solution
+        displayName: Test solution
+        steps:
+          - script: dotnet test $solutionName
+
+      - job: install_semantic
+        dependsOn: test_solution
+        displayName: Install Semantic
+        steps:
+          - script: |
+              echo '##vso[task.prependpath]$(HOME)/.local/bin'
+            displayName: PATH
+          - script: |
+              npm install npm@6
+            displayName: npm@6
+          - script: |
+              npm install semantic-release
+            displayName: semantic-release
+          - script: |
+              npm install @semantic-release/changelog
+            displayName: semantic-release/changelog
+          - script: |
+              npm install @semantic-release/exec
+            displayName: semantic-release/exec
+          - script: |
+              npm install @semantic-release/git
+            displayName: semantic-release/git
+          - script: |
+              npm install @semantic-release/github
+            displayName: semantic-release/github
+          - script: |
+              pip3 install --user bump2version
+            displayName: bump2version
+
+      - job: semantic_release
+        dependsOn: install_semantic
+        displayName: Semantic Release
+        steps:
+          - script: |
+              echo '##vso[task.prependpath]$(HOME)/.local/bin'
+            displayName: PATH
+          - script: |
+              npx semantic-release
+            displayName: semantic-release
+            env:
+              GH_TOKEN: $(githubToken)
+
+      - job: release_build
+        dependsOn: semantic_release
+        displayName: Release build
+        steps:
+          - script: |
+              dotnet build $solutionName $releaseBuild
+            displayName: Release build
+  
