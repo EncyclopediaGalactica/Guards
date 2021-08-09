@@ -5,7 +5,8 @@
         <version>0.1.9</version>
         <authors>Andras Csanyi</authors>
         <description>Simple validators.</description>
-        <projectUrl>https://github.com/EncyclopediaGalactica</projectUrl>
+        <projectUrl>https://github.com/EncyclopediaGalactica/Guards</projectUrl>
         <title>Guards for Encyclopedia Galactica system.</title>
+        <repository type="git" url="https://github.com/EncyclopediaGalactica/Guards" branch="main"/>
     </metadata>
 </package>
