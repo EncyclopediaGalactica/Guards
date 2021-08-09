@@ -115,26 +115,15 @@ stages:
               dotnet pack Guards.csproj --configuration Release --include-symbols -p:NuspecFile=Guards.nuspec
             displayName: Nuget
             workingDirectory: src/Guards
-            
-          - script:
-              echo "##vso[task.setvariable variable=RELEASE_VERSION;isOutput=true]cat version.txt"
-            name: createReleaseVersionVar
-            
+
           - script: |
-              echo "GH_TOKEN: "$GH_TOKEN
-              echo "USERNAME: "$USERNAME
-              echo "NUGET_TOKEN: "$NUGET_TOKEN
-              echo "RELEASE_VER: "RELEASE_VER
-              echo "src/Guards/Guards/bin/Release/EncyclopediaGalactica.Guards.$RELEASE_VER.nupkg"
-              echo "src/Guards/Guards/bin/Release/EncyclopediaGalactica.Guards.`cat version.txt`.nupkg"
               dotnet nuget add source --username $USERNAME --password $NUGET_TOKEN --store-password-in-clear-text --name "github" "https://nuget.pkg.github.com/EncyclopediaGalactica/index.json"
               dotnet nuget push src/Guards/Guards/bin/Release/EncyclopediaGalactica.Guards.`cat version.txt`.nupkg --api-key $NUGET_TOKEN --source "github"
               dotnet nuget push src/Guards/Guards/bin/Release/EncyclopediaGalactica.Guards.`cat version.txt`.symbols.nupkg --api-key $NUGET_TOKEN --source "github"
+              dotnet nuget remove source "github"
             displayName: Publish Nuget
             env:
               GH_TOKEN: $(githubToken)
               USERNAME: $(githubUserName)
-              NUGET_TOKEN: $(nugetToken)
-              RELEASE_VER: $(createReleaseVersionVar.RELEASE_VERSION)
-              
+              NUGET_TOKEN: $(nugetToken)              
   
