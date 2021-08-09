@@ -127,7 +127,6 @@ stages:
               dotnet nuget push src/Guards/Guards/bin/Release/EncyclopediaGalactica.Guards.`cat version.txt`.nupkg --api-key $NUGET_TOKEN --source "github"
               dotnet nuget push src/Guards/Guards/bin/Release/EncyclopediaGalactica.Guards.`cat version.txt`.symbols.nupkg --api-key $NUGET_TOKEN --source "github"
             displayName: Publish Nuget
-            dependsOn: createReleaseVersionVar
             env:
               GH_TOKEN: $(githubToken)
               USERNAME: $(githubUserName)
