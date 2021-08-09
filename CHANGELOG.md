@@ -1,3 +1,10 @@
+## [0.1.21](https://github.com/EncyclopediaGalactica/Guards/compare/0.1.20...0.1.21) (2021-08-09)
+
+
+### Bug Fixes
+
+* order ([#23](https://github.com/EncyclopediaGalactica/Guards/issues/23)) ([97473ee](https://github.com/EncyclopediaGalactica/Guards/commit/97473eebf36e0a03e443135c3e8a17c4e9af10b1))
+
 ## [0.1.20](https://github.com/EncyclopediaGalactica/Guards/compare/0.1.19...0.1.20) (2021-08-09)
 
 
