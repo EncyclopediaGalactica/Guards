@@ -1,3 +1,10 @@
+## [0.1.18](https://github.com/EncyclopediaGalactica/Guards/compare/0.1.17...0.1.18) (2021-08-09)
+
+
+### Bug Fixes
+
+* fine tune push ([#20](https://github.com/EncyclopediaGalactica/Guards/issues/20)) ([028a5d5](https://github.com/EncyclopediaGalactica/Guards/commit/028a5d5bc42ec595a8e8d2e9af0ac8eb0eb68b8f))
+
 ## [0.1.17](https://github.com/EncyclopediaGalactica/Guards/compare/0.1.16...0.1.17) (2021-08-09)
 
 
