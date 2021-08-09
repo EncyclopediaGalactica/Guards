@@ -14,19 +14,46 @@ variables:
   solutionName: 'SourceFormatService.sln'
 
 stages:
-  - stage: Env_Variables
+  - stage: Setup
     jobs:
-      - job:
+      - job: env_vars
+        displayName: Env variables
         steps:
           - script: |
               echo $PATH
               env | sort
+      - job: dotcover_install
+        displayName: Install dotCover
+        steps:
+          - script: |
+              dotnet new tool-manifest
+              dotnet tool install --local JetBrains.dotCover.GlobalTool
+              dotnet tool install --local dotnet-sonarscanner
 
   - stage: Feature_branch
     condition: ne(variables['System.PullRequest.SourceBranch'], '')
     jobs:
+      - job: sonar_scan
+        displayName: Sonar scan
+        steps:
+          - script: |
+              dotnet sonarscanner begin \
+              /k:"Guards" \
+              /d:sonar.host.url=$(sonar.host.url) \
+              /d:sonar.login=$SONAR_LOGIN_NAME \
+              /o:$(sonar.organization) \
+              /s:../s/sonar.xml \
+              /d:sonar.pullrequest.key=$(System.PullRequest.PullRequestNumber) \
+              /d:sonar.pullrequest.branch=$(System.PullRequest.SourceBranch) \
+              /d:sonar.pullrequest.base=main \
+              /d:sonar.pullrequest.provider=GitHub \
+              /d:sonar.pullrequest.github.repository=EncyclopediaGalactica/Guards
+            env:
+              SONAR_LOGIN_NAME: $(sonar.login)
+
       - job: restore_solution
         displayName: Restore solution
+        dependsOn: sonar_scan
         steps:
           - script: dotnet restore $solutionName
 
@@ -37,14 +64,41 @@ stages:
           - script: dotnet build $solutionName $debugBuild
 
       - job: test_solution
-        displayName: Test solution
+        displayName: Test and Coverage
         dependsOn: build_solution
         steps:
-          - script: dotnet test $solutionName
+          - script: |
+              dotnet dotcover test \
+              --no-build \
+              --dotCoverReportType=html           
+
+      - job: sonar_end
+        dependsOn: test_solution
+        displayName: Sonar End
+        steps:
+          - script: |
+              dotnet sonarscanner end /d:sonar.login=$(sonar.login)
+            env:
+              SONAR_LOGIN_NAME: $(sonar.login)
 
   - stage: Main_branch
     condition: and(eq(variables['System.PullRequest.SourceBranch'], ''), eq(variables['Build.SourceBranch'],'refs/heads/main'))
     jobs:
+
+      - job: sonar_scan
+        displayName: Sonar scan
+        steps:
+          - script: |
+              dotnet sonarscanner begin \
+              /k:"Guards" \
+              /d:sonar.host.url=$(sonar.host.url) \
+              /d:sonar.login=$SONAR_LOGIN_NAME \
+              /o:$(sonar.organization) \
+              /s:../s/sonar.xml \
+              /d:sonar.pullrequest.provider=GitHub \
+              /d:sonar.pullrequest.github.repository=EncyclopediaGalactica/Guards
+            env:
+              SONAR_LOGIN_NAME: $(sonar.login)
 
       - job: restore_solution
         displayName: Restore solution
@@ -104,6 +158,15 @@ stages:
             displayName: semantic-release
             env:
               GH_TOKEN: $(githubToken)
+              
+      - job: sonar_end
+        dependsOn: test_solution
+        displayName: Sonar End
+        steps:
+          - script: |
+              dotnet sonarscanner end /d:sonar.login=$(sonar.login)
+            env:
+              SONAR_LOGIN_NAME: $(sonar.login)
 
       - job: nuget
         dependsOn: semantic_release
@@ -117,7 +180,10 @@ stages:
             workingDirectory: src/Guards
 
           - script: |
-              dotnet nuget push src/Guards/bin/Release/EncyclopediaGalactica.Guards.`cat version.txt`.nupkg --api-key $NUGET_TOKEN --source "https://nuget.pkg.github.com/EncyclopediaGalactica/index.json" --skip-duplicate
+              dotnet nuget push src/Guards/bin/Release/EncyclopediaGalactica.Guards.`cat version.txt`.nupkg \ 
+              --api-key $NUGET_TOKEN \ 
+              --source "https://nuget.pkg.github.com/EncyclopediaGalactica/index.json" \ 
+              --skip-duplicate
             displayName: Publish Nuget
             env:
               GH_TOKEN: $(githubToken)
