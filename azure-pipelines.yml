@@ -42,7 +42,7 @@ stages:
               /d:sonar.host.url=$(sonar.host.url) \
               /d:sonar.login=$SONAR_LOGIN_NAME \
               /o:$(sonar.organization) \
-              /s:sonar.xml \
+              /s:../s/sonar.xml \
               /d:sonar.pullrequest.key=$(System.PullRequest.PullRequestNumber) \
               /d:sonar.pullrequest.branch=$(System.PullRequest.SourceBranch) \
               /d:sonar.pullrequest.base=main \
