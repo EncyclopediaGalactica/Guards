@@ -121,11 +121,9 @@ stages:
             name: createReleaseVersionVar
             
           - script:
-              echo version-$(createReleaseVersionVar.RELEASE_VERSION)-
-              echo version-$RELEASE_VER
               dotnet nuget add source --username $USERNAME --password $NUGET_TOKEN --store-password-in-clear-text--name "github" "https://nuget.pkg.github.com/EncyclopediaGalactica/index.json"
-              dotnet nuget push src/Guards/Guards/bin/Release/EncyclopediaGalactica.Guards.`cat version.txt`.nupkg --api-key $NUGET_TOKEN --source "github"
-              dotnet nuget push src/Guards/Guards/bin/Release/EncyclopediaGalactica.Guards.`cat version.txt`.symbols.nupkg --api-key $NUGET_TOKEN --source "github"
+              dotnet nuget push src/Guards/Guards/bin/Release/EncyclopediaGalactica.Guards.$RELEASE_VER.nupkg --api-key $NUGET_TOKEN --source "github"
+              dotnet nuget push src/Guards/Guards/bin/Release/EncyclopediaGalactica.Guards.$RELEASE_VER.symbols.nupkg --api-key $NUGET_TOKEN --source "github"
             displayName: Publish Nuget
             env:
               GH_TOKEN: $(githubToken)
