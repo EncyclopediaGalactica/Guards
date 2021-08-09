@@ -1,3 +1,10 @@
+## [0.1.11](https://github.com/EncyclopediaGalactica/Guards/compare/0.1.10...0.1.11) (2021-08-09)
+
+
+### Bug Fixes
+
+* nuget publish ([#13](https://github.com/EncyclopediaGalactica/Guards/issues/13)) ([b9f6d1a](https://github.com/EncyclopediaGalactica/Guards/commit/b9f6d1aead32b963093f149b1b16031ebdfccb7b))
+
 ## [0.1.10](https://github.com/EncyclopediaGalactica/Guards/compare/0.1.9...0.1.10) (2021-08-09)
 
 
