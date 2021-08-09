@@ -117,6 +117,15 @@ stages:
         steps:
           - script: dotnet test $solutionName
 
+      - job: sonar_end
+        dependsOn: test_solution
+        displayName: Sonar End
+        steps:
+          - script: |
+              dotnet sonarscanner end /d:sonar.login=$(sonar.login)
+            env:
+              SONAR_LOGIN_NAME: $(sonar.login)
+
       - job: install_semantic
         dependsOn: test_solution
         displayName: Install Semantic
@@ -158,15 +167,6 @@ stages:
             displayName: semantic-release
             env:
               GH_TOKEN: $(githubToken)
-              
-      - job: sonar_end
-        dependsOn: test_solution
-        displayName: Sonar End
-        steps:
-          - script: |
-              dotnet sonarscanner end /d:sonar.login=$(sonar.login)
-            env:
-              SONAR_LOGIN_NAME: $(sonar.login)
 
       - job: nuget
         dependsOn: semantic_release
@@ -180,10 +180,7 @@ stages:
             workingDirectory: src/Guards
 
           - script: |
-              dotnet nuget push src/Guards/bin/Release/EncyclopediaGalactica.Guards.`cat version.txt`.nupkg \ 
-              --api-key $NUGET_TOKEN \ 
-              --source "https://nuget.pkg.github.com/EncyclopediaGalactica/index.json" \ 
-              --skip-duplicate
+              dotnet nuget push src/Guards/bin/Release/EncyclopediaGalactica.Guards.`cat version.txt`.nupkg --api-key $NUGET_TOKEN --source "https://nuget.pkg.github.com/EncyclopediaGalactica/index.json" --skip-duplicate
             displayName: Publish Nuget
             env:
               GH_TOKEN: $(githubToken)
