@@ -85,6 +85,21 @@ stages:
     condition: and(eq(variables['System.PullRequest.SourceBranch'], ''), eq(variables['Build.SourceBranch'],'refs/heads/main'))
     jobs:
 
+      - job: sonar_scan
+        displayName: Sonar scan
+        steps:
+          - script: |
+              dotnet sonarscanner begin \
+              /k:"Guards" \
+              /d:sonar.host.url=$(sonar.host.url) \
+              /d:sonar.login=$SONAR_LOGIN_NAME \
+              /o:$(sonar.organization) \
+              /s:../s/sonar.xml \
+              /d:sonar.pullrequest.provider=GitHub \
+              /d:sonar.pullrequest.github.repository=EncyclopediaGalactica/Guards
+            env:
+              SONAR_LOGIN_NAME: $(sonar.login)
+
       - job: restore_solution
         displayName: Restore solution
         steps:
@@ -143,6 +158,15 @@ stages:
             displayName: semantic-release
             env:
               GH_TOKEN: $(githubToken)
+              
+      - job: sonar_end
+        dependsOn: test_solution
+        displayName: Sonar End
+        steps:
+          - script: |
+              dotnet sonarscanner end /d:sonar.login=$(sonar.login)
+            env:
+              SONAR_LOGIN_NAME: $(sonar.login)
 
       - job: nuget
         dependsOn: semantic_release
