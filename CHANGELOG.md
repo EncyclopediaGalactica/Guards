@@ -1,3 +1,10 @@
+## [0.1.19](https://github.com/EncyclopediaGalactica/Guards/compare/0.1.18...0.1.19) (2021-08-09)
+
+
+### Bug Fixes
+
+* sonarcloud ([#21](https://github.com/EncyclopediaGalactica/Guards/issues/21)) ([debbe6d](https://github.com/EncyclopediaGalactica/Guards/commit/debbe6d60e6f8dd5644904ab2858a06779658073))
+
 ## [0.1.18](https://github.com/EncyclopediaGalactica/Guards/compare/0.1.17...0.1.18) (2021-08-09)
 
 
