@@ -127,7 +127,7 @@ stages:
               SONAR_LOGIN_NAME: $(sonar.login)
 
       - job: install_semantic
-        dependsOn: test_solution
+        dependsOn: sonar_end
         displayName: Install Semantic
         steps:
           - script: |
