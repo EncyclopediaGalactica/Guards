@@ -1,3 +1,10 @@
+## [0.1.13](https://github.com/EncyclopediaGalactica/Guards/compare/0.1.12...0.1.13) (2021-08-09)
+
+
+### Bug Fixes
+
+* script ([#15](https://github.com/EncyclopediaGalactica/Guards/issues/15)) ([5f521d5](https://github.com/EncyclopediaGalactica/Guards/commit/5f521d5209b6c82332e0cc87afea1ea803624e07))
+
 ## [0.1.12](https://github.com/EncyclopediaGalactica/Guards/compare/0.1.11...0.1.12) (2021-08-09)
 
 
