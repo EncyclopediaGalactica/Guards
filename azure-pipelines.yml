@@ -123,12 +123,13 @@ stages:
           - script: |
               echo "GH_TOKEN: "$GH_TOKEN
               echo "USERNAME: "$USERNAME
-              echo "NUGET_TOKEN: "NUGET_TOKEN
+              echo "NUGET_TOKEN: "$NUGET_TOKEN
               echo "RELEASE_VER: "RELEASE_VER
               echo "src/Guards/Guards/bin/Release/EncyclopediaGalactica.Guards.$RELEASE_VER.nupkg"
+              echo "src/Guards/Guards/bin/Release/EncyclopediaGalactica.Guards.`cat version.txt`.nupkg"
               dotnet nuget add source --username $USERNAME --password $NUGET_TOKEN --store-password-in-clear-text --name "github" "https://nuget.pkg.github.com/EncyclopediaGalactica/index.json"
-              dotnet nuget push src/Guards/Guards/bin/Release/EncyclopediaGalactica.Guards.$RELEASE_VER.nupkg --api-key $NUGET_TOKEN --source "github"
-              dotnet nuget push src/Guards/Guards/bin/Release/EncyclopediaGalactica.Guards.$RELEASE_VER.symbols.nupkg --api-key $NUGET_TOKEN --source "github"
+              dotnet nuget push src/Guards/Guards/bin/Release/EncyclopediaGalactica.Guards.`cat version.txt`.nupkg --api-key $NUGET_TOKEN --source "github"
+              dotnet nuget push src/Guards/Guards/bin/Release/EncyclopediaGalactica.Guards.`cat version.txt`.symbols.nupkg --api-key $NUGET_TOKEN --source "github"
             displayName: Publish Nuget
             env:
               GH_TOKEN: $(githubToken)
