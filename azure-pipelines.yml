@@ -16,13 +16,13 @@ variables:
 stages:
   - stage: Setup
     jobs:
-      - job:
+      - job: env_vars
         displayName: Env variables
         steps:
           - script: |
               echo $PATH
               env | sort
-      - job:
+      - job: dotcover_install
         displayName: Install dotCover
         steps:
           - script: |
