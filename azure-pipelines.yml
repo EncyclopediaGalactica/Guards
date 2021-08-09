@@ -117,10 +117,12 @@ stages:
             workingDirectory: src/Guards
             
           - script:
-              dotnet nuget push src/Guards/Guards/bin/Release/EncyclopediaGalactica.Guards.`cat version.txt`.nupkg --api-key $(GH_TOKEN) --source "github"
-              dotnet nuget push src/Guards/Guards/bin/Release/EncyclopediaGalactica.Guards.`cat version.txt`.symbols.nupkg --api-key $(GH_TOKEN) --source "github"
+              dotnet nuget add source --username $USERNAME --password $GH_TOKEN --store-password-in-clear-text --name "github" "https://nuget.pkg.github.com/EncyclopediaGalactica/index.json"
+              dotnet nuget push src/Guards/Guards/bin/Release/EncyclopediaGalactica.Guards.`cat version.txt`.nupkg --api-key $GH_TOKEN --source "github"
+              dotnet nuget push src/Guards/Guards/bin/Release/EncyclopediaGalactica.Guards.`cat version.txt`.symbols.nupkg --api-key $GH_TOKEN --source "github"
             displayName: Publish Nuget
             env:
               GH_TOKEN: $(githubToken)
+              USERNAME: $(githubUserName)
               
   
