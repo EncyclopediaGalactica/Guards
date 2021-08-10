@@ -46,5 +46,18 @@ namespace EncyclopediaGalactica.Guards.Tests
             // Assert
             action.Should().ThrowExactly<GuardException>();
         }
+        
+        [Fact]
+        public void DoesntThrowException_WhenStringIsNull()
+        {
+            // Arrange
+            string nullString = "asd";
+
+            // Act
+            Action action = () => { Check.NotNullOrEmptyOrWhitespace(nullString); };
+
+            // Assert
+            action.Should().NotThrow<GuardException>();
+        }
     }
 }

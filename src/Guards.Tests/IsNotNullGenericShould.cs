@@ -6,33 +6,36 @@ namespace EncyclopediaGalactica.Guards.Tests
     using Xunit;
 
     [ExcludeFromCodeCoverage]
-    public class IntsAreNotEqualShould
+    public class IsNotNullGenericShould
     {
         [Fact]
-        public void ThrowExceptionWhenValuesAreEqual()
+        public void ThrowWhenGenericIsNull()
         {
             // Arrange
-            int hundred = 100;
-
+            TypeA typeA = null;
+            
             // Act
-            Action action = () => { Check.AreNotEqual(hundred, hundred); };
-
+            Action action = () => { Guards.Check.IsNotNull(typeA); };
+            
             // Assert
             action.Should().ThrowExactly<GuardException>();
         }
         
         [Fact]
-        public void DoesntThrowException_WhenValuesAreEqual()
+        public void DoesntThrow_WhenGenericIsNull()
         {
             // Arrange
-            int hundred = 100;
-            int two = 2;
-
+            TypeA typeA = new TypeA();
+            
             // Act
-            Action action = () => { Check.AreNotEqual(hundred, two); };
-
+            Action action = () => { Guards.Check.IsNotNull(typeA); };
+            
             // Assert
             action.Should().NotThrow<GuardException>();
         }
+    }
+
+    internal class TypeA
+    {
     }
 }
