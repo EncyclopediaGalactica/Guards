@@ -1,3 +1,10 @@
+## [0.1.23](https://github.com/EncyclopediaGalactica/Guards/compare/0.1.22...0.1.23) (2021-10-31)
+
+
+### Bug Fixes
+
+* nuget packages bump ([#25](https://github.com/EncyclopediaGalactica/Guards/issues/25)) ([cec3d6e](https://github.com/EncyclopediaGalactica/Guards/commit/cec3d6e7204fb3c7e5503cebd89307c3bd92be67))
+
 ## [0.1.22](https://github.com/EncyclopediaGalactica/Guards/compare/0.1.21...0.1.22) (2021-08-10)
 
 
